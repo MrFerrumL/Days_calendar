@@ -1,0 +1,2 @@
+# IANA timezone database for Windows (zoneinfo uses system tzdata on Linux).
+tzdata>=2024.1

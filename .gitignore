@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+runtime/
+*.sqlite*
+*.db
+__pycache__/
+*.py[cod]
+.venv/
+.idea/
+.vscode/
+.coverage
+.DS_Store
+*.log

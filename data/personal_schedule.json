@@ -1,0 +1,287 @@
+{
+  "cycle_anchor": "2026-10-19",
+  "timezone": "Europe/Moscow",
+  "source": "Два скриншота пользователя; даты и включение всех занятий подтверждены пользователем.",
+  "lessons": [
+    {
+      "id": "mon18",
+      "weekdays": [
+        0
+      ],
+      "time": "18:00",
+      "duration_minutes": 120,
+      "cycle": "all",
+      "title": "Занятие · Манько Д. / Золотой В."
+    },
+    {
+      "id": "mon20",
+      "weekdays": [
+        0
+      ],
+      "time": "20:00",
+      "duration_minutes": 120,
+      "cycle": "all",
+      "title": "Занятие · Когут С. / Кунавина А."
+    },
+    {
+      "id": "tue1730",
+      "weekdays": [
+        1
+      ],
+      "time": "17:30",
+      "duration_minutes": 120,
+      "cycle": "all",
+      "title": "Занятие · Бессонова Е. / Мацкевич М."
+    },
+    {
+      "id": "tue1930",
+      "weekdays": [
+        1
+      ],
+      "time": "19:30",
+      "duration_minutes": 120,
+      "cycle": "all",
+      "title": "Занятие · Новохадская М. / Ревенко М."
+    },
+    {
+      "id": "wed14",
+      "weekdays": [
+        2
+      ],
+      "time": "14:00",
+      "duration_minutes": 120,
+      "cycle": "all",
+      "title": "Занятие · Ширнаев Н."
+    },
+    {
+      "id": "wed16",
+      "weekdays": [
+        2
+      ],
+      "time": "16:00",
+      "duration_minutes": 120,
+      "cycle": "all",
+      "title": "Занятие · Галкин Д. / Токаев И."
+    },
+    {
+      "id": "wed18",
+      "weekdays": [
+        2
+      ],
+      "time": "18:00",
+      "duration_minutes": 120,
+      "cycle": "all",
+      "title": "Занятие · Маркин А. / Лазаренко Д."
+    },
+    {
+      "id": "thu14",
+      "weekdays": [
+        3
+      ],
+      "time": "14:00",
+      "duration_minutes": 120,
+      "cycle": "all",
+      "title": "Занятие · Абдурахманов П. / Данил З"
+    },
+    {
+      "id": "thu18",
+      "weekdays": [
+        3
+      ],
+      "time": "18:00",
+      "duration_minutes": 120,
+      "cycle": "all",
+      "title": "Занятие · Глухова Д. / Хилько Н."
+    },
+    {
+      "id": "thu20",
+      "weekdays": [
+        3
+      ],
+      "time": "20:00",
+      "duration_minutes": 120,
+      "cycle": "all",
+      "title": "Занятие · Прокофьев Д. / Товмасян Н."
+    },
+    {
+      "id": "sat1730",
+      "weekdays": [
+        5
+      ],
+      "time": "17:30",
+      "duration_minutes": 120,
+      "cycle": "all",
+      "title": "Занятие · Подоляк Т. / Хребтенко Д."
+    },
+    {
+      "id": "sat1930",
+      "weekdays": [
+        5
+      ],
+      "time": "19:30",
+      "duration_minutes": 120,
+      "cycle": "all",
+      "title": "Занятие · Возиян В. / Левин Э."
+    },
+    {
+      "id": "sun10",
+      "weekdays": [
+        6
+      ],
+      "time": "10:00",
+      "duration_minutes": 120,
+      "cycle": "all",
+      "title": "Лекция"
+    },
+    {
+      "id": "sun12",
+      "weekdays": [
+        6
+      ],
+      "time": "12:00",
+      "duration_minutes": 120,
+      "cycle": "all",
+      "title": "Занятие · Десятерик Д. / Мартенс К."
+    },
+    {
+      "id": "sun14",
+      "weekdays": [
+        6
+      ],
+      "time": "14:00",
+      "duration_minutes": 120,
+      "cycle": "all",
+      "title": "Занятие · Ольговой Р. / Мишхожева Э."
+    },
+    {
+      "id": "a-mon16",
+      "weekdays": [
+        0
+      ],
+      "time": "16:00",
+      "duration_minutes": 120,
+      "cycle": "a",
+      "title": "Мигалка · Подоляк Т. / Хребтенко Д."
+    },
+    {
+      "id": "a-thu16",
+      "weekdays": [
+        3
+      ],
+      "time": "16:00",
+      "duration_minutes": 120,
+      "cycle": "a",
+      "title": "Мигалка · Ширнаев Н. / Токаев И."
+    },
+    {
+      "id": "a-fri16",
+      "weekdays": [
+        4
+      ],
+      "time": "16:00",
+      "duration_minutes": 120,
+      "cycle": "a",
+      "title": "Мигалка · Манько Д. / Золотой В."
+    },
+    {
+      "id": "a-fri18",
+      "weekdays": [
+        4
+      ],
+      "time": "18:00",
+      "duration_minutes": 120,
+      "cycle": "a",
+      "title": "Занятие · Беспалов М. / Мельников Д."
+    },
+    {
+      "id": "a-fri20",
+      "weekdays": [
+        4
+      ],
+      "time": "20:00",
+      "duration_minutes": 120,
+      "cycle": "a",
+      "title": "Мигалка · Абдурахманов П. / Данил З"
+    },
+    {
+      "id": "a-sun16",
+      "weekdays": [
+        6
+      ],
+      "time": "16:00",
+      "duration_minutes": 120,
+      "cycle": "a",
+      "title": "Мигалка · Глухова Д. / Хилько Н."
+    },
+    {
+      "id": "a-sun18",
+      "weekdays": [
+        6
+      ],
+      "time": "18:00",
+      "duration_minutes": 120,
+      "cycle": "a",
+      "title": "Мигалка · Новохадская М. / Ревенко М."
+    },
+    {
+      "id": "b-mon16",
+      "weekdays": [
+        0
+      ],
+      "time": "16:00",
+      "duration_minutes": 120,
+      "cycle": "b",
+      "title": "Мигалка · Беспалов М. / Мельников Д."
+    },
+    {
+      "id": "b-thu16",
+      "weekdays": [
+        3
+      ],
+      "time": "16:00",
+      "duration_minutes": 120,
+      "cycle": "b",
+      "title": "Мигалка · Возиян В. / Левин Э."
+    },
+    {
+      "id": "b-fri1430",
+      "weekdays": [
+        4
+      ],
+      "time": "14:30",
+      "duration_minutes": 120,
+      "cycle": "b",
+      "title": "Мигалка · Десятерик Д. / Мартенс К."
+    },
+    {
+      "id": "b-fri1630",
+      "weekdays": [
+        4
+      ],
+      "time": "16:30",
+      "duration_minutes": 120,
+      "cycle": "b",
+      "title": "Мигалка · Прокофьев Д. / Товмасян Н."
+    },
+    {
+      "id": "b-fri1830",
+      "weekdays": [
+        4
+      ],
+      "time": "18:30",
+      "duration_minutes": 120,
+      "cycle": "b",
+      "title": "Занятие · Беспалов М. / Мельников Д."
+    },
+    {
+      "id": "b-sun16",
+      "weekdays": [
+        6
+      ],
+      "time": "16:00",
+      "duration_minutes": 120,
+      "cycle": "b",
+      "title": "Мигалка · Маркин А. / Лазаренко Д."
+    }
+  ]
+}

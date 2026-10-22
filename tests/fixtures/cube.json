@@ -1,0 +1,2164 @@
+{
+  "data": [
+    {
+      "id": 488904,
+      "number": 3,
+      "start_time": "11:10:00",
+      "end_time": "12:30:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 1,
+        "name": "Лекция",
+        "short_name": "ЛК",
+        "color": "#FBB162",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 160,
+        "name": "Операционные системы",
+        "short_name": "Операционные системы"
+      },
+      "place": {
+        "id": 371,
+        "name": "128",
+        "types": [],
+        "size": null
+      },
+      "date": "2026-10-19",
+      "theme": null,
+      "status": 2,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2492,
+          "name": "ИИ21/2",
+          "size": 0
+        },
+        {
+          "id": 2493,
+          "name": "ИИ22/1",
+          "size": 0
+        },
+        {
+          "id": 2494,
+          "name": "ИИ22/2",
+          "size": 0
+        },
+        {
+          "id": 2495,
+          "name": "ИИ23",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 170,
+          "short_name": "Полупанов А.А.",
+          "full_name": "Полупанов Алексей Александрович"
+        }
+      ]
+    },
+    {
+      "id": 488921,
+      "number": 4,
+      "start_time": "12:40:00",
+      "end_time": "14:00:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 4,
+        "name": "Лабораторная",
+        "short_name": "ЛР",
+        "color": "#d9cff3",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 160,
+        "name": "Операционные системы",
+        "short_name": "Операционные системы"
+      },
+      "place": {
+        "id": 41,
+        "name": "105",
+        "types": [],
+        "size": null
+      },
+      "date": "2026-10-19",
+      "theme": null,
+      "status": 2,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 170,
+          "short_name": "Полупанов А.А.",
+          "full_name": "Полупанов Алексей Александрович"
+        }
+      ]
+    },
+    {
+      "id": 489057,
+      "number": 5,
+      "start_time": "14:10:00",
+      "end_time": "15:30:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 4,
+        "name": "Лабораторная",
+        "short_name": "ЛР",
+        "color": "#d9cff3",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 3331,
+        "name": "Инструментальные средства разработки ИИ",
+        "short_name": "Инструментальные средства разработки ИИ"
+      },
+      "place": {
+        "id": 399,
+        "name": "111С",
+        "types": [],
+        "size": 20
+      },
+      "date": "2026-10-19",
+      "theme": null,
+      "status": 2,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 159,
+          "short_name": "Калайдина Г.В.",
+          "full_name": "Калайдина Галина Вениаминовна"
+        }
+      ]
+    },
+    {
+      "id": 488218,
+      "number": 3,
+      "start_time": "11:10:00",
+      "end_time": "12:30:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 1,
+        "name": "Лекция",
+        "short_name": "ЛК",
+        "color": "#FBB162",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 13,
+        "name": "Дифференциальные уравнения",
+        "short_name": "Дифференциальные уравнения"
+      },
+      "place": {
+        "id": 59,
+        "name": "322C",
+        "types": [],
+        "size": null
+      },
+      "date": "2026-10-20",
+      "theme": null,
+      "status": 2,
+      "groups": [
+        {
+          "id": 2486,
+          "name": "КЗ21/1",
+          "size": 0
+        },
+        {
+          "id": 2487,
+          "name": "КЗ21/2",
+          "size": 0
+        },
+        {
+          "id": 2488,
+          "name": "КЗ22/1",
+          "size": 0
+        },
+        {
+          "id": 2489,
+          "name": "КЗ22/2",
+          "size": 0
+        },
+        {
+          "id": 2490,
+          "name": "КЗ23",
+          "size": 0
+        },
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2492,
+          "name": "ИИ21/2",
+          "size": 0
+        },
+        {
+          "id": 2493,
+          "name": "ИИ22/1",
+          "size": 0
+        },
+        {
+          "id": 2494,
+          "name": "ИИ22/2",
+          "size": 0
+        },
+        {
+          "id": 2495,
+          "name": "ИИ23",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 143,
+          "short_name": "Колотий А.Д.",
+          "full_name": "Колотий Александр Дмитриевич"
+        }
+      ]
+    },
+    {
+      "id": 489176,
+      "number": 4,
+      "start_time": "12:40:00",
+      "end_time": "14:00:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 1,
+        "name": "Лекция",
+        "short_name": "ЛК",
+        "color": "#FBB162",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 5,
+        "name": "Математический анализ",
+        "short_name": "Математический анализ"
+      },
+      "place": {
+        "id": 371,
+        "name": "128",
+        "types": [],
+        "size": null
+      },
+      "date": "2026-10-20",
+      "theme": null,
+      "status": 2,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2492,
+          "name": "ИИ21/2",
+          "size": 0
+        },
+        {
+          "id": 2493,
+          "name": "ИИ22/1",
+          "size": 0
+        },
+        {
+          "id": 2494,
+          "name": "ИИ22/2",
+          "size": 0
+        },
+        {
+          "id": 2495,
+          "name": "ИИ23",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 126,
+          "short_name": "Силинская С.М.",
+          "full_name": "Силинская Светлана Михайловна"
+        }
+      ]
+    },
+    {
+      "id": 489193,
+      "number": 5,
+      "start_time": "14:10:00",
+      "end_time": "15:30:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 4,
+        "name": "Лабораторная",
+        "short_name": "ЛР",
+        "color": "#d9cff3",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 3197,
+        "name": "Администрирование информационных систем",
+        "short_name": "Администрирование ИС"
+      },
+      "place": {
+        "id": 399,
+        "name": "111С",
+        "types": [],
+        "size": 20
+      },
+      "date": "2026-10-20",
+      "theme": null,
+      "status": 2,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 173,
+          "short_name": "Прутский А.С.",
+          "full_name": "Прутский Алексей Сергеевич"
+        }
+      ]
+    },
+    {
+      "id": 489244,
+      "number": 6,
+      "start_time": "15:40:00",
+      "end_time": "17:00:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 4,
+        "name": "Лабораторная",
+        "short_name": "ЛР",
+        "color": "#d9cff3",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 5,
+        "name": "Математический анализ",
+        "short_name": "Математический анализ"
+      },
+      "place": {
+        "id": 24,
+        "name": "148",
+        "types": [],
+        "size": 22
+      },
+      "date": "2026-10-20",
+      "theme": null,
+      "status": 2,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 104,
+          "short_name": "Александров А.А.",
+          "full_name": "Александров Андрей Анатольевич"
+        }
+      ]
+    },
+    {
+      "id": 489263,
+      "number": 1,
+      "start_time": "08:00:00",
+      "end_time": "09:20:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 1,
+        "name": "Лекция",
+        "short_name": "ЛК",
+        "color": "#FBB162",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 5,
+        "name": "Математический анализ",
+        "short_name": "Математический анализ"
+      },
+      "place": {
+        "id": 371,
+        "name": "128",
+        "types": [],
+        "size": null
+      },
+      "date": "2026-10-21",
+      "theme": null,
+      "status": 2,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2492,
+          "name": "ИИ21/2",
+          "size": 0
+        },
+        {
+          "id": 2493,
+          "name": "ИИ22/1",
+          "size": 0
+        },
+        {
+          "id": 2494,
+          "name": "ИИ22/2",
+          "size": 0
+        },
+        {
+          "id": 2495,
+          "name": "ИИ23",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 126,
+          "short_name": "Силинская С.М.",
+          "full_name": "Силинская Светлана Михайловна"
+        }
+      ]
+    },
+    {
+      "id": 489275,
+      "number": 2,
+      "start_time": "09:30:00",
+      "end_time": "10:50:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 4,
+        "name": "Лабораторная",
+        "short_name": "ЛР",
+        "color": "#d9cff3",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 3330,
+        "name": "Обработка данных на Python",
+        "short_name": "Обработка данных на Python"
+      },
+      "place": {
+        "id": 61,
+        "name": "103",
+        "types": [],
+        "size": null
+      },
+      "date": "2026-10-21",
+      "theme": null,
+      "status": 2,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 171,
+          "short_name": "Казаковцева Е.В.",
+          "full_name": "Казаковцева Екатерина Васильевна"
+        }
+      ]
+    },
+    {
+      "id": 488818,
+      "number": 0,
+      "start_time": null,
+      "end_time": null,
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 5,
+        "name": "КСРС",
+        "short_name": "КСРС",
+        "color": "#dfdfdf",
+        "all_day": true,
+        "inactive": false
+      },
+      "discipline": null,
+      "place": null,
+      "date": "2026-10-22",
+      "theme": null,
+      "status": 2,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2492,
+          "name": "ИИ21/2",
+          "size": 0
+        },
+        {
+          "id": 2493,
+          "name": "ИИ22/1",
+          "size": 0
+        },
+        {
+          "id": 2494,
+          "name": "ИИ22/2",
+          "size": 0
+        },
+        {
+          "id": 2495,
+          "name": "ИИ23",
+          "size": 0
+        }
+      ],
+      "teachers": []
+    },
+    {
+      "id": 488720,
+      "number": 2,
+      "start_time": "09:30:00",
+      "end_time": "10:50:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 1,
+        "name": "Лекция",
+        "short_name": "ЛК",
+        "color": "#FBB162",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 13,
+        "name": "Дифференциальные уравнения",
+        "short_name": "Дифференциальные уравнения"
+      },
+      "place": {
+        "id": 59,
+        "name": "322C",
+        "types": [],
+        "size": null
+      },
+      "date": "2026-10-23",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2486,
+          "name": "КЗ21/1",
+          "size": 0
+        },
+        {
+          "id": 2487,
+          "name": "КЗ21/2",
+          "size": 0
+        },
+        {
+          "id": 2488,
+          "name": "КЗ22/1",
+          "size": 0
+        },
+        {
+          "id": 2489,
+          "name": "КЗ22/2",
+          "size": 0
+        },
+        {
+          "id": 2490,
+          "name": "КЗ23",
+          "size": 0
+        },
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2492,
+          "name": "ИИ21/2",
+          "size": 0
+        },
+        {
+          "id": 2493,
+          "name": "ИИ22/1",
+          "size": 0
+        },
+        {
+          "id": 2494,
+          "name": "ИИ22/2",
+          "size": 0
+        },
+        {
+          "id": 2495,
+          "name": "ИИ23",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 143,
+          "short_name": "Колотий А.Д.",
+          "full_name": "Колотий Александр Дмитриевич"
+        }
+      ]
+    },
+    {
+      "id": 486985,
+      "number": 3,
+      "start_time": "11:10:00",
+      "end_time": "12:30:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 1,
+        "name": "Лекция",
+        "short_name": "ЛК",
+        "color": "#FBB162",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 11,
+        "name": "Элективные дисциплины по физической культуре и спорту",
+        "short_name": "Элект. дисц. по физ. культ. и спорту"
+      },
+      "place": null,
+      "date": "2026-10-23",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2409,
+          "name": "ПМ21/1",
+          "size": 0
+        },
+        {
+          "id": 2410,
+          "name": "ПМ21/2",
+          "size": 0
+        },
+        {
+          "id": 2416,
+          "name": "ФИ21",
+          "size": 0
+        },
+        {
+          "id": 2418,
+          "name": "ПИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2419,
+          "name": "ПИ21/2",
+          "size": 0
+        },
+        {
+          "id": 2420,
+          "name": "ПИ22",
+          "size": 0
+        },
+        {
+          "id": 2446,
+          "name": "МО21",
+          "size": 0
+        },
+        {
+          "id": 2485,
+          "name": "ИН21",
+          "size": 0
+        },
+        {
+          "id": 2486,
+          "name": "КЗ21/1",
+          "size": 0
+        },
+        {
+          "id": 2487,
+          "name": "КЗ21/2",
+          "size": 0
+        },
+        {
+          "id": 2488,
+          "name": "КЗ22/1",
+          "size": 0
+        },
+        {
+          "id": 2489,
+          "name": "КЗ22/2",
+          "size": 0
+        },
+        {
+          "id": 2490,
+          "name": "КЗ23",
+          "size": 0
+        },
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2492,
+          "name": "ИИ21/2",
+          "size": 0
+        },
+        {
+          "id": 2493,
+          "name": "ИИ22/1",
+          "size": 0
+        },
+        {
+          "id": 2494,
+          "name": "ИИ22/2",
+          "size": 0
+        },
+        {
+          "id": 2495,
+          "name": "ИИ23",
+          "size": 0
+        }
+      ],
+      "teachers": []
+    },
+    {
+      "id": 489509,
+      "number": 4,
+      "start_time": "12:40:00",
+      "end_time": "14:00:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 1,
+        "name": "Лекция",
+        "short_name": "ЛК",
+        "color": "#FBB162",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 3331,
+        "name": "Инструментальные средства разработки ИИ",
+        "short_name": "Инструментальные средства разработки ИИ"
+      },
+      "place": {
+        "id": 371,
+        "name": "128",
+        "types": [],
+        "size": null
+      },
+      "date": "2026-10-23",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2492,
+          "name": "ИИ21/2",
+          "size": 0
+        },
+        {
+          "id": 2493,
+          "name": "ИИ22/1",
+          "size": 0
+        },
+        {
+          "id": 2494,
+          "name": "ИИ22/2",
+          "size": 0
+        },
+        {
+          "id": 2495,
+          "name": "ИИ23",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 160,
+          "short_name": "Коваленко А.В.",
+          "full_name": "Коваленко Анна Владимировна"
+        }
+      ]
+    },
+    {
+      "id": 489456,
+      "number": 5,
+      "start_time": "14:10:00",
+      "end_time": "15:30:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 4,
+        "name": "Лабораторная",
+        "short_name": "ЛР",
+        "color": "#d9cff3",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 13,
+        "name": "Дифференциальные уравнения",
+        "short_name": "Дифференциальные уравнения"
+      },
+      "place": {
+        "id": 54,
+        "name": "А305",
+        "types": [],
+        "size": 64
+      },
+      "date": "2026-10-23",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 73,
+          "short_name": "Савин В.Н.",
+          "full_name": "Савин Владимир Николаевич"
+        }
+      ]
+    },
+    {
+      "id": 489590,
+      "number": 3,
+      "start_time": "11:10:00",
+      "end_time": "12:30:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 1,
+        "name": "Лекция",
+        "short_name": "ЛК",
+        "color": "#FBB162",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 3197,
+        "name": "Администрирование информационных систем",
+        "short_name": "Администрирование ИС"
+      },
+      "place": {
+        "id": 371,
+        "name": "128",
+        "types": [],
+        "size": null
+      },
+      "date": "2026-10-24",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2492,
+          "name": "ИИ21/2",
+          "size": 0
+        },
+        {
+          "id": 2493,
+          "name": "ИИ22/1",
+          "size": 0
+        },
+        {
+          "id": 2494,
+          "name": "ИИ22/2",
+          "size": 0
+        },
+        {
+          "id": 2495,
+          "name": "ИИ23",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 172,
+          "short_name": "Тыщенко В.В.",
+          "full_name": "Тыщенко Виктор Владиславович"
+        }
+      ]
+    },
+    {
+      "id": 489675,
+      "number": 4,
+      "start_time": "12:40:00",
+      "end_time": "14:00:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 4,
+        "name": "Лабораторная",
+        "short_name": "ЛР",
+        "color": "#d9cff3",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 13,
+        "name": "Дифференциальные уравнения",
+        "short_name": "Дифференциальные уравнения"
+      },
+      "place": {
+        "id": 36,
+        "name": "133",
+        "types": [],
+        "size": 32
+      },
+      "date": "2026-10-24",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 73,
+          "short_name": "Савин В.Н.",
+          "full_name": "Савин Владимир Николаевич"
+        }
+      ]
+    },
+    {
+      "id": 489658,
+      "number": 5,
+      "start_time": "14:10:00",
+      "end_time": "15:30:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 4,
+        "name": "Лабораторная",
+        "short_name": "ЛР",
+        "color": "#d9cff3",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 6,
+        "name": "Иностранный язык",
+        "short_name": "Иностранный язык"
+      },
+      "place": {
+        "id": 35,
+        "name": "А307",
+        "types": [],
+        "size": 60
+      },
+      "date": "2026-10-24",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 112,
+          "short_name": "Лопатина Н.Р.",
+          "full_name": "Лопатина Наталья Романовна"
+        }
+      ]
+    },
+    {
+      "id": 489692,
+      "number": 6,
+      "start_time": "15:40:00",
+      "end_time": "17:00:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 4,
+        "name": "Лабораторная",
+        "short_name": "ЛР",
+        "color": "#d9cff3",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 50,
+        "name": "Объектно-ориентированное программирование",
+        "short_name": "ООП"
+      },
+      "place": {
+        "id": 399,
+        "name": "111С",
+        "types": [],
+        "size": 20
+      },
+      "date": "2026-10-24",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 173,
+          "short_name": "Прутский А.С.",
+          "full_name": "Прутский Алексей Сергеевич"
+        }
+      ]
+    },
+    {
+      "id": 488856,
+      "number": 2,
+      "start_time": "09:30:00",
+      "end_time": "10:50:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 2,
+        "name": "Практика",
+        "short_name": "ПР",
+        "color": "#04B18F",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 12,
+        "name": "Экономика",
+        "short_name": "Экономика"
+      },
+      "place": {
+        "id": 29,
+        "name": "149",
+        "types": [],
+        "size": 24
+      },
+      "date": "2026-10-26",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2492,
+          "name": "ИИ21/2",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 5994,
+          "short_name": "Хетагурова З.В.",
+          "full_name": "Хетагурова Заира Владимировна"
+        }
+      ]
+    },
+    {
+      "id": 488903,
+      "number": 3,
+      "start_time": "11:10:00",
+      "end_time": "12:30:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 1,
+        "name": "Лекция",
+        "short_name": "ЛК",
+        "color": "#FBB162",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 160,
+        "name": "Операционные системы",
+        "short_name": "Операционные системы"
+      },
+      "place": {
+        "id": 371,
+        "name": "128",
+        "types": [],
+        "size": null
+      },
+      "date": "2026-10-26",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2492,
+          "name": "ИИ21/2",
+          "size": 0
+        },
+        {
+          "id": 2493,
+          "name": "ИИ22/1",
+          "size": 0
+        },
+        {
+          "id": 2494,
+          "name": "ИИ22/2",
+          "size": 0
+        },
+        {
+          "id": 2495,
+          "name": "ИИ23",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 170,
+          "short_name": "Полупанов А.А.",
+          "full_name": "Полупанов Алексей Александрович"
+        }
+      ]
+    },
+    {
+      "id": 488920,
+      "number": 4,
+      "start_time": "12:40:00",
+      "end_time": "14:00:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 4,
+        "name": "Лабораторная",
+        "short_name": "ЛР",
+        "color": "#d9cff3",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 160,
+        "name": "Операционные системы",
+        "short_name": "Операционные системы"
+      },
+      "place": {
+        "id": 41,
+        "name": "105",
+        "types": [],
+        "size": null
+      },
+      "date": "2026-10-26",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 170,
+          "short_name": "Полупанов А.А.",
+          "full_name": "Полупанов Алексей Александрович"
+        }
+      ]
+    },
+    {
+      "id": 489056,
+      "number": 5,
+      "start_time": "14:10:00",
+      "end_time": "15:30:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 4,
+        "name": "Лабораторная",
+        "short_name": "ЛР",
+        "color": "#d9cff3",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 3331,
+        "name": "Инструментальные средства разработки ИИ",
+        "short_name": "Инструментальные средства разработки ИИ"
+      },
+      "place": {
+        "id": 399,
+        "name": "111С",
+        "types": [],
+        "size": 20
+      },
+      "date": "2026-10-26",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 159,
+          "short_name": "Калайдина Г.В.",
+          "full_name": "Калайдина Галина Вениаминовна"
+        }
+      ]
+    },
+    {
+      "id": 488217,
+      "number": 3,
+      "start_time": "11:10:00",
+      "end_time": "12:30:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 1,
+        "name": "Лекция",
+        "short_name": "ЛК",
+        "color": "#FBB162",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 13,
+        "name": "Дифференциальные уравнения",
+        "short_name": "Дифференциальные уравнения"
+      },
+      "place": {
+        "id": 59,
+        "name": "322C",
+        "types": [],
+        "size": null
+      },
+      "date": "2026-10-27",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2486,
+          "name": "КЗ21/1",
+          "size": 0
+        },
+        {
+          "id": 2487,
+          "name": "КЗ21/2",
+          "size": 0
+        },
+        {
+          "id": 2488,
+          "name": "КЗ22/1",
+          "size": 0
+        },
+        {
+          "id": 2489,
+          "name": "КЗ22/2",
+          "size": 0
+        },
+        {
+          "id": 2490,
+          "name": "КЗ23",
+          "size": 0
+        },
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2492,
+          "name": "ИИ21/2",
+          "size": 0
+        },
+        {
+          "id": 2493,
+          "name": "ИИ22/1",
+          "size": 0
+        },
+        {
+          "id": 2494,
+          "name": "ИИ22/2",
+          "size": 0
+        },
+        {
+          "id": 2495,
+          "name": "ИИ23",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 143,
+          "short_name": "Колотий А.Д.",
+          "full_name": "Колотий Александр Дмитриевич"
+        }
+      ]
+    },
+    {
+      "id": 489175,
+      "number": 4,
+      "start_time": "12:40:00",
+      "end_time": "14:00:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 1,
+        "name": "Лекция",
+        "short_name": "ЛК",
+        "color": "#FBB162",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 5,
+        "name": "Математический анализ",
+        "short_name": "Математический анализ"
+      },
+      "place": {
+        "id": 371,
+        "name": "128",
+        "types": [],
+        "size": null
+      },
+      "date": "2026-10-27",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2492,
+          "name": "ИИ21/2",
+          "size": 0
+        },
+        {
+          "id": 2493,
+          "name": "ИИ22/1",
+          "size": 0
+        },
+        {
+          "id": 2494,
+          "name": "ИИ22/2",
+          "size": 0
+        },
+        {
+          "id": 2495,
+          "name": "ИИ23",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 126,
+          "short_name": "Силинская С.М.",
+          "full_name": "Силинская Светлана Михайловна"
+        }
+      ]
+    },
+    {
+      "id": 489192,
+      "number": 5,
+      "start_time": "14:10:00",
+      "end_time": "15:30:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 4,
+        "name": "Лабораторная",
+        "short_name": "ЛР",
+        "color": "#d9cff3",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 3197,
+        "name": "Администрирование информационных систем",
+        "short_name": "Администрирование ИС"
+      },
+      "place": {
+        "id": 399,
+        "name": "111С",
+        "types": [],
+        "size": 20
+      },
+      "date": "2026-10-27",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 173,
+          "short_name": "Прутский А.С.",
+          "full_name": "Прутский Алексей Сергеевич"
+        }
+      ]
+    },
+    {
+      "id": 489243,
+      "number": 6,
+      "start_time": "15:40:00",
+      "end_time": "17:00:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 4,
+        "name": "Лабораторная",
+        "short_name": "ЛР",
+        "color": "#d9cff3",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 5,
+        "name": "Математический анализ",
+        "short_name": "Математический анализ"
+      },
+      "place": {
+        "id": 24,
+        "name": "148",
+        "types": [],
+        "size": 22
+      },
+      "date": "2026-10-27",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 104,
+          "short_name": "Александров А.А.",
+          "full_name": "Александров Андрей Анатольевич"
+        }
+      ]
+    },
+    {
+      "id": 489255,
+      "number": 1,
+      "start_time": "08:00:00",
+      "end_time": "09:20:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 1,
+        "name": "Лекция",
+        "short_name": "ЛК",
+        "color": "#FBB162",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 50,
+        "name": "Объектно-ориентированное программирование",
+        "short_name": "ООП"
+      },
+      "place": {
+        "id": 371,
+        "name": "128",
+        "types": [],
+        "size": null
+      },
+      "date": "2026-10-28",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2492,
+          "name": "ИИ21/2",
+          "size": 0
+        },
+        {
+          "id": 2493,
+          "name": "ИИ22/1",
+          "size": 0
+        },
+        {
+          "id": 2494,
+          "name": "ИИ22/2",
+          "size": 0
+        },
+        {
+          "id": 2495,
+          "name": "ИИ23",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 115,
+          "short_name": "Подколзин В.В.",
+          "full_name": "Подколзин Вадим Владиславович"
+        }
+      ]
+    },
+    {
+      "id": 489274,
+      "number": 2,
+      "start_time": "09:30:00",
+      "end_time": "10:50:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 4,
+        "name": "Лабораторная",
+        "short_name": "ЛР",
+        "color": "#d9cff3",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 3330,
+        "name": "Обработка данных на Python",
+        "short_name": "Обработка данных на Python"
+      },
+      "place": {
+        "id": 61,
+        "name": "103",
+        "types": [],
+        "size": null
+      },
+      "date": "2026-10-28",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 171,
+          "short_name": "Казаковцева Е.В.",
+          "full_name": "Казаковцева Екатерина Васильевна"
+        }
+      ]
+    },
+    {
+      "id": 488817,
+      "number": 0,
+      "start_time": null,
+      "end_time": null,
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 5,
+        "name": "КСРС",
+        "short_name": "КСРС",
+        "color": "#dfdfdf",
+        "all_day": true,
+        "inactive": false
+      },
+      "discipline": null,
+      "place": null,
+      "date": "2026-10-29",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2492,
+          "name": "ИИ21/2",
+          "size": 0
+        },
+        {
+          "id": 2493,
+          "name": "ИИ22/1",
+          "size": 0
+        },
+        {
+          "id": 2494,
+          "name": "ИИ22/2",
+          "size": 0
+        },
+        {
+          "id": 2495,
+          "name": "ИИ23",
+          "size": 0
+        }
+      ],
+      "teachers": []
+    },
+    {
+      "id": 489440,
+      "number": 1,
+      "start_time": "08:00:00",
+      "end_time": "09:20:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 4,
+        "name": "Лабораторная",
+        "short_name": "ЛР",
+        "color": "#d9cff3",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 5,
+        "name": "Математический анализ",
+        "short_name": "Математический анализ"
+      },
+      "place": {
+        "id": 24,
+        "name": "148",
+        "types": [],
+        "size": 22
+      },
+      "date": "2026-10-30",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 104,
+          "short_name": "Александров А.А.",
+          "full_name": "Александров Андрей Анатольевич"
+        }
+      ]
+    },
+    {
+      "id": 489491,
+      "number": 2,
+      "start_time": "09:30:00",
+      "end_time": "10:50:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 1,
+        "name": "Лекция",
+        "short_name": "ЛК",
+        "color": "#FBB162",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 12,
+        "name": "Экономика",
+        "short_name": "Экономика"
+      },
+      "place": {
+        "id": 371,
+        "name": "128",
+        "types": [],
+        "size": null
+      },
+      "date": "2026-10-30",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2492,
+          "name": "ИИ21/2",
+          "size": 0
+        },
+        {
+          "id": 2493,
+          "name": "ИИ22/1",
+          "size": 0
+        },
+        {
+          "id": 2494,
+          "name": "ИИ22/2",
+          "size": 0
+        },
+        {
+          "id": 2495,
+          "name": "ИИ23",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 127,
+          "short_name": "Болик А.В.",
+          "full_name": "Болик Анастасия Викторовна"
+        }
+      ]
+    },
+    {
+      "id": 486984,
+      "number": 3,
+      "start_time": "11:10:00",
+      "end_time": "12:30:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 1,
+        "name": "Лекция",
+        "short_name": "ЛК",
+        "color": "#FBB162",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 11,
+        "name": "Элективные дисциплины по физической культуре и спорту",
+        "short_name": "Элект. дисц. по физ. культ. и спорту"
+      },
+      "place": null,
+      "date": "2026-10-30",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2409,
+          "name": "ПМ21/1",
+          "size": 0
+        },
+        {
+          "id": 2410,
+          "name": "ПМ21/2",
+          "size": 0
+        },
+        {
+          "id": 2416,
+          "name": "ФИ21",
+          "size": 0
+        },
+        {
+          "id": 2418,
+          "name": "ПИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2419,
+          "name": "ПИ21/2",
+          "size": 0
+        },
+        {
+          "id": 2420,
+          "name": "ПИ22",
+          "size": 0
+        },
+        {
+          "id": 2446,
+          "name": "МО21",
+          "size": 0
+        },
+        {
+          "id": 2485,
+          "name": "ИН21",
+          "size": 0
+        },
+        {
+          "id": 2486,
+          "name": "КЗ21/1",
+          "size": 0
+        },
+        {
+          "id": 2487,
+          "name": "КЗ21/2",
+          "size": 0
+        },
+        {
+          "id": 2488,
+          "name": "КЗ22/1",
+          "size": 0
+        },
+        {
+          "id": 2489,
+          "name": "КЗ22/2",
+          "size": 0
+        },
+        {
+          "id": 2490,
+          "name": "КЗ23",
+          "size": 0
+        },
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2492,
+          "name": "ИИ21/2",
+          "size": 0
+        },
+        {
+          "id": 2493,
+          "name": "ИИ22/1",
+          "size": 0
+        },
+        {
+          "id": 2494,
+          "name": "ИИ22/2",
+          "size": 0
+        },
+        {
+          "id": 2495,
+          "name": "ИИ23",
+          "size": 0
+        }
+      ],
+      "teachers": []
+    },
+    {
+      "id": 489500,
+      "number": 4,
+      "start_time": "12:40:00",
+      "end_time": "14:00:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 1,
+        "name": "Лекция",
+        "short_name": "ЛК",
+        "color": "#FBB162",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 3330,
+        "name": "Обработка данных на Python",
+        "short_name": "Обработка данных на Python"
+      },
+      "place": {
+        "id": 371,
+        "name": "128",
+        "types": [],
+        "size": null
+      },
+      "date": "2026-10-30",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2492,
+          "name": "ИИ21/2",
+          "size": 0
+        },
+        {
+          "id": 2493,
+          "name": "ИИ22/1",
+          "size": 0
+        },
+        {
+          "id": 2494,
+          "name": "ИИ22/2",
+          "size": 0
+        },
+        {
+          "id": 2495,
+          "name": "ИИ23",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 171,
+          "short_name": "Казаковцева Е.В.",
+          "full_name": "Казаковцева Екатерина Васильевна"
+        }
+      ]
+    },
+    {
+      "id": 489589,
+      "number": 3,
+      "start_time": "11:10:00",
+      "end_time": "12:30:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 1,
+        "name": "Лекция",
+        "short_name": "ЛК",
+        "color": "#FBB162",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 3197,
+        "name": "Администрирование информационных систем",
+        "short_name": "Администрирование ИС"
+      },
+      "place": {
+        "id": 371,
+        "name": "128",
+        "types": [],
+        "size": null
+      },
+      "date": "2026-10-31",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        },
+        {
+          "id": 2492,
+          "name": "ИИ21/2",
+          "size": 0
+        },
+        {
+          "id": 2493,
+          "name": "ИИ22/1",
+          "size": 0
+        },
+        {
+          "id": 2494,
+          "name": "ИИ22/2",
+          "size": 0
+        },
+        {
+          "id": 2495,
+          "name": "ИИ23",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 172,
+          "short_name": "Тыщенко В.В.",
+          "full_name": "Тыщенко Виктор Владиславович"
+        }
+      ]
+    },
+    {
+      "id": 489674,
+      "number": 4,
+      "start_time": "12:40:00",
+      "end_time": "14:00:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 4,
+        "name": "Лабораторная",
+        "short_name": "ЛР",
+        "color": "#d9cff3",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 13,
+        "name": "Дифференциальные уравнения",
+        "short_name": "Дифференциальные уравнения"
+      },
+      "place": {
+        "id": 36,
+        "name": "133",
+        "types": [],
+        "size": 32
+      },
+      "date": "2026-10-31",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 73,
+          "short_name": "Савин В.Н.",
+          "full_name": "Савин Владимир Николаевич"
+        }
+      ]
+    },
+    {
+      "id": 489657,
+      "number": 5,
+      "start_time": "14:10:00",
+      "end_time": "15:30:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 4,
+        "name": "Лабораторная",
+        "short_name": "ЛР",
+        "color": "#d9cff3",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 6,
+        "name": "Иностранный язык",
+        "short_name": "Иностранный язык"
+      },
+      "place": {
+        "id": 35,
+        "name": "А307",
+        "types": [],
+        "size": 60
+      },
+      "date": "2026-10-31",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 112,
+          "short_name": "Лопатина Н.Р.",
+          "full_name": "Лопатина Наталья Романовна"
+        }
+      ]
+    },
+    {
+      "id": 489691,
+      "number": 6,
+      "start_time": "15:40:00",
+      "end_time": "17:00:00",
+      "is_remotely": false,
+      "is_elective": false,
+      "type": {
+        "id": 4,
+        "name": "Лабораторная",
+        "short_name": "ЛР",
+        "color": "#d9cff3",
+        "all_day": false,
+        "inactive": false
+      },
+      "discipline": {
+        "id": 50,
+        "name": "Объектно-ориентированное программирование",
+        "short_name": "ООП"
+      },
+      "place": {
+        "id": 399,
+        "name": "111С",
+        "types": [],
+        "size": 20
+      },
+      "date": "2026-10-31",
+      "theme": null,
+      "status": 1,
+      "groups": [
+        {
+          "id": 2491,
+          "name": "ИИ21/1",
+          "size": 0
+        }
+      ],
+      "teachers": [
+        {
+          "id": 173,
+          "short_name": "Прутский А.С.",
+          "full_name": "Прутский Алексей Сергеевич"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "last_change": {
+      "timestamp": "2026-10-15T16:47:55.146173"
+    },
+    "semester_id": 9,
+    "semester_faculty": null,
+    "week": null,
+    "start_date": "2026-09-01",
+    "end_date": "2026-12-29",
+    "timeline": [
+      "2023-09-01"
+    ]
+  },
+  "status": "AVAILABLE"
+}
