@@ -43,6 +43,8 @@ async def get_json(url, service="Источник"):
 class Telegram:
     def __init__(self, token):
         self._base = "https://api.telegram.org/bot" + token + "/"
+        self._send_lock = asyncio.Lock()
+        self._next_send = {}
 
     async def call(self, method, **payload):
         response = await asyncio.to_thread(request_json, self._base + method, payload, 45, "Telegram")
@@ -66,6 +68,14 @@ class Telegram:
                 split = chunk.rfind("\n")
                 if split > 0:
                     chunk = chunk[:split + 1]
-            await self.call("sendMessage", chat_id=chat_id, text=chunk,
-                            link_preview_options={"is_disabled": True}, **kwargs)
+            async with self._send_lock:
+                loop = asyncio.get_running_loop()
+                delay = self._next_send.get(chat_id, 0) - loop.time()
+                if delay > 0:
+                    await asyncio.sleep(delay)
+                try:
+                    await self.call("sendMessage", chat_id=chat_id, text=chunk,
+                                    link_preview_options={"is_disabled": True}, **kwargs)
+                finally:
+                    self._next_send[chat_id] = loop.time() + 1.05
             text = text[len(chunk):]
