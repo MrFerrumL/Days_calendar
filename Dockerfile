@@ -8,5 +8,6 @@ RUN pip install --no-cache-dir -r requirements.txt \
     && chown bot:bot /app/runtime
 COPY campus_bot ./campus_bot
 COPY data ./data
+COPY connect_miniapp.py .
 USER bot
 CMD ["python", "-m", "campus_bot"]

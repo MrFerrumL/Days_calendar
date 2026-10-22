@@ -42,3 +42,18 @@ if ($botProcess.HasExited) {
 }
 Write-Output "Bot started in background (PID $($botProcess.Id)). Open https://t.me/caled_bot_ai"
 Write-Output 'You can close this window. Use stop-bot.cmd to stop the bot.'
+$botTunnelExe = Join-Path $botRuntime 'tools\cloudflared.exe'
+if (Test-Path -LiteralPath $botTunnelExe) {
+    $botTunnelPidFile = Join-Path $botRuntime 'tunnel.pid'
+    $botTunnelActive = $null
+    if (Test-Path -LiteralPath $botTunnelPidFile) {
+        $botTunnelId = [int](Get-Content -LiteralPath $botTunnelPidFile -Raw).Trim()
+        $botTunnelActive = Get-CimInstance Win32_Process -Filter "ProcessId=$botTunnelId" -ErrorAction SilentlyContinue
+        if ($botTunnelActive -and $botTunnelActive.ExecutablePath -ne $botTunnelExe) { $botTunnelActive = $null }
+    }
+    if (-not $botTunnelActive) {
+        $botTunnel = Start-Process -FilePath $botTunnelExe -ArgumentList @('tunnel','--url','http://127.0.0.1:8765','--protocol','http2','--no-autoupdate') -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $botRuntime 'tunnel-out.log') -RedirectStandardError (Join-Path $botRuntime 'tunnel.log')
+        $botTunnel.Id | Set-Content -LiteralPath $botTunnelPidFile
+    }
+    & $botPython (Join-Path $PSScriptRoot 'connect_miniapp.py')
+}

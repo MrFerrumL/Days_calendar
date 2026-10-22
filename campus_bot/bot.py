@@ -1,6 +1,7 @@
 import asyncio
 from datetime import date, datetime, timedelta
 import logging
+import os
 from uuid import uuid4
 
 from .jobs import Scheduler, occurrences
@@ -95,6 +96,13 @@ class Bot:
                              "Время сводок, погоды и напоминаний можно менять в /settings.\n"
                              "Настройка: /settings · все возможности: /help", reply_markup=MENU)
             await self.reply(await self.day_text(today))
+        elif cmd == "/app":
+            url = self.store.get('mini_app_url') or os.getenv('MINI_APP_URL','')
+            if url.startswith('https://'):
+                await self.reply('📅 Ваш календарь, задачи и занятия',reply_markup={'inline_keyboard':[[
+                    {'text':'Открыть приложение','web_app':{'url':url}}]]})
+            else:
+                await self.reply('Адрес Mini App ещё не настроен.')
         elif cmd == "/help":
             await self.reply(HELP, reply_markup=MENU)
         elif cmd in ("/today", "/tomorrow", "/day"):
@@ -323,7 +331,7 @@ class Bot:
         log.info("Бот @%s запущен; OWNER_ID %s", identity["username"], "настроен" if self.config.owner_id else "не настроен")
         await self.telegram.call("setMyCommands", commands=[
             {"command": name, "description": desc} for name, desc in
-            [("today", "План на сегодня"), ("tomorrow", "План на завтра"), ("next", "Следующее занятие"),
+            [("app", "Открыть приложение"), ("today", "План на сегодня"), ("tomorrow", "План на завтра"), ("next", "Следующее занятие"),
              ("tasks", "Задачи и планы"), ("weather", "Погода Краснодара"),
              ("settings", "Настройки"), ("help", "Все команды"), ("id", "Мой Telegram ID")]])
         worker = asyncio.create_task(self.scheduler.run())

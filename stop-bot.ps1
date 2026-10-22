@@ -12,3 +12,12 @@ if ($botExisting) {
 }
 Remove-Item -LiteralPath $botPidFile
 Write-Output 'Bot stopped. Plans and settings are saved.'
+$botTunnelPidFile = Join-Path $PSScriptRoot 'runtime\tunnel.pid'
+if (Test-Path -LiteralPath $botTunnelPidFile) {
+    $botTunnelId = [int](Get-Content -LiteralPath $botTunnelPidFile -Raw).Trim()
+    $botTunnel = Get-CimInstance Win32_Process -Filter "ProcessId=$botTunnelId" -ErrorAction SilentlyContinue
+    if ($botTunnel -and $botTunnel.ExecutablePath -eq (Join-Path $PSScriptRoot 'runtime\tools\cloudflared.exe')) {
+        Stop-Process -Id $botTunnelId
+    }
+    Remove-Item -LiteralPath $botTunnelPidFile
+}

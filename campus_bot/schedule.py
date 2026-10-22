@@ -2,6 +2,7 @@ import asyncio
 from datetime import date, datetime, timedelta
 import hashlib
 import json
+from dataclasses import replace
 from urllib.parse import urlencode
 
 from .models import Event, at
@@ -127,7 +128,15 @@ class Schedule:
             # Include events crossing midnight in both days.
             if start.date() <= day <= (end - timedelta(microseconds=1)).date():
                 result.append(Event("plan:" + str(item["id"]), item["title"], start, end, "plan"))
-        return sorted(result, key=lambda e: (e.start, e.title)), note, changed
+        adjusted = []
+        for event in result:
+            patch = self.store.override(event.uid + '|' + event.start.date().isoformat())
+            if patch:
+                event = replace(event, title=patch['title'], start=datetime.fromisoformat(patch['start']),
+                                end=datetime.fromisoformat(patch['end']), cancelled=patch.get('cancelled', False), all_day=False,
+                                details=event.details + ' · личная правка')
+            adjusted.append(event)
+        return sorted(adjusted, key=lambda e: (e.start, e.title)), note, changed
 
     async def upcoming(self, now, days=7):
         events, notes = {}, []

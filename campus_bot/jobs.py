@@ -107,7 +107,8 @@ class Scheduler:
         if evening:
             await self.deliver(f"evening:{now.date()}:{evening}", at(now.date(), evening, bot.config.timezone), now,
                                lambda: bot.day_text(now.date() + timedelta(days=1), weather=False), grace=30)
-        unique = {(e.uid, e.start): e for e in today + tomorrow}
+        unique = {(e.uid, e.start): e for e in today + tomorrow
+                  if not store.checked(e.uid+'|'+e.start.date().isoformat())}
         for job in notification_jobs(now, list(unique.values()), store.items(), store.get("alert_minutes")):
             async def text_for(job=job):
                 return job.text + ("\n⚠️ Расписание вуза из кэша; проверьте сайт." if

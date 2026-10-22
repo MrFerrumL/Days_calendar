@@ -3,6 +3,10 @@ services:
     build: .
     restart: unless-stopped
     env_file: .env
+    environment:
+      MINI_APP_HOST: 0.0.0.0
+    ports:
+      - "127.0.0.1:8765:8765"
     volumes:
       - bot-data:/app/runtime
     init: true

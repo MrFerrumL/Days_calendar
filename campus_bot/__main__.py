@@ -70,7 +70,13 @@ async def main(args):
                 await bot.telegram.call("deleteWebhook", drop_pending_updates=False)
                 print("Webhook удалён. Запустите python -m campus_bot")
             else:
-                await bot.run()
+                from .miniapp import start_server
+                server = start_server(config)
+                try:
+                    await bot.run()
+                finally:
+                    server.shutdown()
+                    server.server_close()
         finally:
             store.close()
     return 0

@@ -26,6 +26,8 @@ class Store:
               due TEXT NOT NULL, duration INTEGER NOT NULL DEFAULT 0,
               recurrence TEXT NOT NULL DEFAULT 'once', done INTEGER NOT NULL DEFAULT 0);
             CREATE TABLE IF NOT EXISTS deliveries (key TEXT PRIMARY KEY, sent TEXT NOT NULL);
+            CREATE TABLE IF NOT EXISTS checks (key TEXT PRIMARY KEY, done INTEGER NOT NULL);
+            CREATE TABLE IF NOT EXISTS overrides (key TEXT PRIMARY KEY, value TEXT NOT NULL);
         """)
         self.db.commit()
 
@@ -103,3 +105,19 @@ class Store:
 
     def close(self):
         self.db.close()
+
+    def checked(self, key):
+        row = self.db.execute('SELECT done FROM checks WHERE key=?', (key,)).fetchone()
+        return bool(row[0]) if row else False
+
+    def check(self, key, done):
+        with self.db:
+            self.db.execute('INSERT OR REPLACE INTO checks VALUES (?,?)', (key, int(done)))
+
+    def override(self, key):
+        row = self.db.execute('SELECT value FROM overrides WHERE key=?', (key,)).fetchone()
+        return json.loads(row[0]) if row else None
+
+    def put_override(self, key, value):
+        with self.db:
+            self.db.execute('INSERT OR REPLACE INTO overrides VALUES (?,?)', (key, json.dumps(value, ensure_ascii=False)))
