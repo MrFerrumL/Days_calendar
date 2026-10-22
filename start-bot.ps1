@@ -1,4 +1,11 @@
 $ErrorActionPreference = 'Stop'
+$botServerMarker = Join-Path $PSScriptRoot 'runtime\server-deployment.json'
+if (Test-Path -LiteralPath $botServerMarker) {
+    $botServer = Get-Content -LiteralPath $botServerMarker -Raw | ConvertFrom-Json
+    Write-Output ('This bot is hosted on the server: ' + $botServer.url)
+    Write-Output 'Local polling is disabled to prevent a Telegram conflict.'
+    exit 0
+}
 $botRuntime = Join-Path $PSScriptRoot 'runtime'
 $botRunner = Join-Path $PSScriptRoot 'run_bot.py'
 $botPidFile = Join-Path $botRuntime 'process.json'

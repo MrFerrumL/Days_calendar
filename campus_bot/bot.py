@@ -324,7 +324,15 @@ class Bot:
         await self.reply("✅ Настройка сохранена.")
 
     async def run(self):
-        identity = await self.telegram.call("getMe")
+        while True:
+            try:
+                identity = await self.telegram.call("getMe")
+                break
+            except ServiceError as exc:
+                if exc.status == 401:
+                    raise ValueError('Проверьте BOT_TOKEN') from None
+                log.warning('Telegram недоступен при запуске; Mini App продолжает работать. Повтор через 30 с.')
+                await asyncio.sleep(30)
         webhook = await self.telegram.call("getWebhookInfo")
         if webhook.get("url"):
             raise ValueError("У бота установлен webhook. Для перехода на polling запустите --delete-webhook.")

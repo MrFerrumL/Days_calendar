@@ -68,6 +68,22 @@ Invoke-WebRequest https://github.com/cloudflare/cloudflared/releases/latest/down
 
 ## Быстрый запуск
 
+### Текущее серверное размещение
+
+Mini App: **https://infocode1.ru/calendar/**. Код находится в `/opt/campus-day-bot`, данные — в `/opt/campus-day-bot/runtime/bot.sqlite3`. Сервис `campus-day-bot` подключён к существующей Docker-сети `infocode_default`; маршрут `/calendar/*` в Caddy направляет запросы к нему, остальные страницы продолжают обслуживаться платформой ЕГЭ.
+
+```bash
+cd /opt/campus-day-bot
+sudo docker compose -f compose.server.yaml up -d --build
+sudo docker compose -f compose.server.yaml logs --tail=50 bot
+```
+
+`restart: unless-stopped` и включённый Docker обеспечивают запуск после перезагрузки VPS. Локальный запуск Windows блокируется маркером `runtime/server-deployment.json`, чтобы не создавать второй polling-процесс. Не запускайте локальную и серверную копии одновременно.
+
+Бэкап исходной конфигурации Caddy хранится в `/opt/campus-day-bot/deploy-backups/`. При обновлении платформы ЕГЭ сохраняйте маршрут `/calendar/*`. Клиент использует относительные адреса ресурсов и API, поэтому работает под этим префиксом.
+
+При недоступности Telegram на старте HTTP-сервер Mini App продолжает работать, бот повторяет соединение каждые 30 секунд. Для сообщений и напоминаний серверу нужен исходящий HTTPS-доступ к `api.telegram.org`. Прямой доступ к данным без подписанного Telegram initData закрыт.
+
 Нужны Python **3.11+**, интернет и токен Telegram. Платные API и ключ для погоды не нужны.
 
 ### 1. Скачать проект и установить зависимости
