@@ -2,6 +2,7 @@ import argparse
 import asyncio
 from contextlib import contextmanager
 from datetime import date, datetime
+import json
 import logging
 import os
 from pathlib import Path
@@ -48,6 +49,9 @@ async def main(args):
         store = Store(config.data_dir / "bot.sqlite3")
         try:
             schedule = Schedule(store, config)
+            seed = config.lessons_path.parent / "hackathons.json"
+            if seed.exists():
+                store.seed_projects(json.loads(seed.read_text(encoding="utf-8")), config.timezone)
             weather = Weather(store, config.timezone)
             bot = Bot(config, store, schedule, weather, Telegram(config.token))
             if args.reset_offset:
@@ -60,6 +64,7 @@ async def main(args):
                 events, note, _ = await schedule.day(today, force=True)
                 print("Группа:", store.get("group_name"))
                 print("Регулярных правил:", len(store.rules()))
+                print("Хакатонов:", len(store.projects()))
                 print("Событий на сегодня:", len(events))
                 print(note or "Сайт расписания: OK")
                 forecast = await weather.today()

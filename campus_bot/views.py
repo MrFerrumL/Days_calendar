@@ -9,16 +9,16 @@ def event_line(event):
     return result + ("\n  " + event.details if event.details else "")
 
 
-def agenda(day, events, note, store, weather=""):
+def agenda(day, events, note, store, weather="", outlook=""):
     anchor = date.fromisoformat(store.get("cycle_anchor", "2026-10-19"))
     cycle = "A" if ((day - anchor).days // 7) % 2 == 0 else "B"
     parts = [f"📅 {day:%d.%m.%Y} · {WEEKDAYS[day.weekday()]} · неделя {cycle}"]
     if weather:
         parts.append(weather)
     for source, label in [("university", "🎓 Вуз · " + store.get("group_name")),
-                          ("personal", "📚 Занятия"), ("plan", "🗓 Мои планы")]:
+                          ("personal", "📚 Занятия"), ("plan", "🗓 Мои планы"), ("hackathon", "🏆 Хакатоны")]:
         selected = [e for e in events if e.source == source]
-        if source == "plan" and not selected:
+        if source in ("plan", "hackathon") and not selected:
             continue
         text = "\n".join(event_line(e) for e in selected)
         if not text:
@@ -26,10 +26,15 @@ def agenda(day, events, note, store, weather=""):
         parts.append(label + "\n" + text)
     if note:
         parts.append(note)
-    tasks = [t for t in store.items("task") if datetime.fromisoformat(t["due"]).date() <= day]
+    projects = {p["id"]: p for p in store.projects()}
+    tasks = [t for t in store.items("task") if datetime.fromisoformat(t["due"]).date() <= day and (
+        not t["project"] or projects.get(t["project"], {}).get("status") not in (None, "done", "dropped"))]
     if tasks:
         parts.append("🎯 Дедлайны и просроченные задачи\n" + "\n".join(
-            f"#{t['id']} · {datetime.fromisoformat(t['due']):%d.%m %H:%M} · {t['title']}" for t in tasks))
+            f"#{t['id']} · {datetime.fromisoformat(t['due']):%d.%m %H:%M} · "
+            + (projects[t["project"]]["title"] + " — " if t["project"] else "") + t["title"] for t in tasks))
+    if outlook:
+        parts.append("🏆 Скоро по хакатонам\n" + outlook)
     conflicts = overlaps(events)
     if conflicts:
         parts.append("⚠️ Пересечения\n" + "\n".join(
@@ -41,8 +46,8 @@ def agenda(day, events, note, store, weather=""):
     return "\n\n".join(parts)
 
 
-MENU = {"keyboard": [["📅 Сегодня", "🌅 Завтра"], ["⏭ Следующее", "🌤 Погода"],
-                     ["🕊 Свободное время", "🎯 Задачи"], ["➕ Задача", "⚙️ Настройки"]],
+MENU = {"keyboard": [["📅 Сегодня", "🌅 Завтра"], ["⏭ Следующее", "🏆 Хакатоны"],
+                     ["🎯 Задачи", "🕊 Свободное время"], ["🌤 Погода", "⚙️ Настройки"]],
         "resize_keyboard": True, "is_persistent": True}
 
 HELP = """📔 Campus Day — команды
@@ -64,6 +69,18 @@ HELP = """📔 Campus Day — команды
 /done 3 — завершить задачу / отменить план или напоминание
 /move 3 2026-11-03 18:00 — перенести
 /focus 25 Математический анализ — таймер фокуса
+
+ХАКАТОНЫ
+/hack — все хакатоны, ближайшие этапы и пересечения
+/hack hackchange — карточка: этапы, ссылки, кнопки статуса
+/hack new alfa Alfa-Hack 2026 — новый хакатон (ID латиницей)
+/hack alfa task 2026-11-16 14:00 Сдать решение — дедлайн
+/hack alfa event 2026-11-09 14:00 120 Старт кейса — событие
+/hack alfa day 2026-11-22 Финал — на весь день
+/hack alfa link https://example.com Кабинет — ссылка
+/hack alfa status final — registration, review, accepted,
+  active, submitted, final, done, dropped
+Дедлайны хакатонов напоминают за 3 дня, сутки, 2 часа и в срок.
 
 НАПОМИНАНИЯ
 /remind 2026-11-02 18:00 Купить тетради

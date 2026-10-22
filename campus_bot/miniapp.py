@@ -12,6 +12,7 @@ import threading
 import time
 from urllib.parse import parse_qsl, urlsplit, parse_qs
 from uuid import uuid4
+from . import hackathons
 from .models import clock
 from .schedule import Schedule
 from .storage import Store
@@ -68,9 +69,50 @@ class App:
                 row.update(start=e.start.isoformat(),end=e.end.isoformat(),key=key,done=store.checked(key))
                 events[key] = row
             day += timedelta(days=1)
-        return dict(events=list(events.values()),tasks=store.items('task',include_done=True),rules=store.rules(),
-                    group=store.get('group_name'),notes=notes,weather=await Weather(store,self.config.timezone).today(),
-                    settings={k:store.get(k) for k in ('digest_times','weather_times','notifications')})
+        now = datetime.now(self.config.timezone)
+        dropped = {p['id'] for p in store.projects() if p.get('status')=='dropped'}
+        return dict(events=list(events.values()),tasks=[t for t in store.items('task',include_done=True) if t['project'] not in dropped],
+                    rules=store.rules(),group=store.get('group_name'),notes=notes,weather=await Weather(store,self.config.timezone).today(),
+                    settings={k:store.get(k) for k in ('digest_times','weather_times','notifications')},
+                    hackathons=hackathons.overview(store,now),clashes=hackathons.clash_lines(store,now),
+                    statuses=hackathons.STATUSES,kinds=hackathons.KINDS)
+
+    def project(self,store,body):
+        uid = body.get('id') or 'h-'+uuid4().hex[:6]
+        if not hackathons.PROJECT_ID.fullmatch(uid) or body.get('status') not in hackathons.STATUSES or body.get('kind') not in hackathons.KINDS:
+            raise ValueError('Проверьте статус и тип')
+        links = body.get('links',[])
+        if not isinstance(links,list) or len(links)>8 or any(not isinstance(l.get('url'),str) or len(l['url'])>500
+                                                             or not l['url'].startswith(('https://','http://')) for l in links):
+            raise ValueError('До восьми ссылок http(s)')
+        text = lambda name,limit: str(body.get(name) or '').strip()[:limit]
+        store.put_project(dict(id=uid,title=title(body['title']),kind=body['kind'],status=body['status'],organizer=text('organizer',200),
+                               role=text('role',60),summary=text('summary',1000),prize=text('prize',300),
+                               links=[dict(title=title(str(l.get('title') or 'Ссылка'))[:60],url=l['url']) for l in links]))
+        return uid
+
+    def stage(self,store,body):
+        tz = self.config.timezone
+        project,kind = body['project'],body['kind']
+        if not store.project(project) or kind not in ('task','event','allday'):
+            raise ValueError('Неизвестный хакатон или тип этапа')
+        if kind == 'allday':
+            days = int(body.get('days',1))
+            if not 1 <= days <= 14:
+                raise ValueError('От 1 до 14 дней')
+            start,duration = datetime.combine(date.fromisoformat(body['date']),datetime.min.time(),tzinfo=tz),days*1440
+        else:
+            start,duration = moment(body['start'],tz),int(body.get('duration',60)) if kind == 'event' else 0
+            if kind == 'event' and not 5 <= duration <= 1440:
+                raise ValueError('Длительность: 5–1440 минут')
+        row = ('task' if kind == 'task' else 'event',title(body['title']),start.isoformat(),duration,
+               str(body.get('note') or '').strip()[:500],int(kind == 'allday'))
+        if body.get('id'):
+            with store.db:
+                store.db.execute('UPDATE items SET kind=?,title=?,due=?,duration=?,note=?,all_day=? WHERE id=? AND project=?',
+                                 row+(int(body['id']),project))
+        else:
+            store.add_item(row[0],row[1],row[2],row[3],project=project,note=row[4],all_day=row[5])
 
     def mutate(self,store,action,body):
         tz = self.config.timezone
@@ -117,6 +159,28 @@ class App:
                                 duration_minutes=duration,cycle=body['cycle'],title=title(body['title'])))
         elif action == 'delete-rule':
             store.delete_rule(body['id'])
+        elif action == 'project':
+            return {'ok':True,'id':self.project(store,body)}
+        elif action == 'hack-status':
+            project = store.project(body['id'])
+            if not project or body['status'] not in hackathons.STATUSES:
+                raise ValueError('Неверный статус')
+            project['status'] = body['status']
+            store.put_project(project)
+        elif action == 'delete-project':
+            store.delete_project(body['id'])
+        elif action == 'stage':
+            self.stage(store,body)
+        elif action == 'stage-check':
+            if type(body['done']) is not bool:
+                raise ValueError('Неверная отметка')
+            item = next((i for i in store.items(include_done=True) if i['id'] == int(body['id']) and i['project']),None)
+            if not item:
+                raise ValueError('Этап не найден')
+            hackathons.set_done(store,item,body['done'])
+        elif action == 'delete-stage':
+            with store.db:
+                store.db.execute('DELETE FROM items WHERE id=? AND project IS NOT NULL',(int(body['id']),))
         elif action == 'settings':
             for name in ('digest_times','weather_times'):
                 if name in body:

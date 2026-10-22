@@ -30,8 +30,8 @@ class Job:
     text: str
 
 
-def notification_jobs(now, events, items, alert_minutes):
-    jobs = []
+def notification_jobs(now, events, items, alert_minutes, projects=None):
+    jobs, projects = [], projects or {}
     for event in events:
         if event.cancelled or event.all_day or event.start <= now:
             continue
@@ -41,12 +41,18 @@ def notification_jobs(now, events, items, alert_minutes):
                             f"⏰ Через {lead} мин · {event.time_label}\n{event.title}\n{event.details}"))
     for item in items:
         if item["kind"] == "task":
+            project = projects.get(item.get("project"))
+            if item.get("project") and (not project or project.get("status") in ("done", "dropped")):
+                continue
             due = datetime.fromisoformat(item["due"])
-            for hours in (24, 2, 0):
+            # Hackathon deadlines need time to organise a team, so they start three days ahead.
+            for hours in (72, 24, 2, 0) if project else (24, 2, 0):
                 when = due - timedelta(hours=hours)
                 label = f"через {hours} ч" if hours else "сейчас"
+                head = f"🏆 {project['title']} · дедлайн {label}" if project else f"🎯 Дедлайн {label}"
+                note = "\n" + item["note"] if item.get("note") else ""
                 jobs.append(Job(f"task:{item['id']}:{due.isoformat()}:{hours}", when,
-                                f"🎯 Дедлайн {label} · #{item['id']}\n{item['title']}\n{due:%d.%m %H:%M}"))
+                                f"{head} · #{item['id']}\n{item['title']}\n{due:%d.%m %H:%M}{note}"))
         elif item["kind"] == "reminder":
             for due in occurrences(item, now.date() - timedelta(days=1), now.date()):
                 jobs.append(Job(f"reminder:{item['id']}:{due.isoformat()}", due,
@@ -109,7 +115,8 @@ class Scheduler:
                                lambda: bot.day_text(now.date() + timedelta(days=1), weather=False), grace=30)
         unique = {(e.uid, e.start): e for e in today + tomorrow
                   if not store.checked(e.uid+'|'+e.start.date().isoformat())}
-        for job in notification_jobs(now, list(unique.values()), store.items(), store.get("alert_minutes")):
+        projects = {p["id"]: p for p in store.projects()}
+        for job in notification_jobs(now, list(unique.values()), store.items(), store.get("alert_minutes"), projects):
             async def text_for(job=job):
                 return job.text + ("\n⚠️ Расписание вуза из кэша; проверьте сайт." if
                                    job.key.startswith("event:uni:") and (note or note2) else "")

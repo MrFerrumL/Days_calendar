@@ -24,8 +24,7 @@ if (Test-Path -LiteralPath $botPidFile) {
 }
 
 $botCandidates = @(
-    (Join-Path $PSScriptRoot '.venv\Scripts\python.exe'),
-    (Join-Path $env:USERPROFILE '.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe')
+    (Join-Path $PSScriptRoot '.venv\Scripts\python.exe')
 )
 $botSystemPython = Get-Command python.exe -ErrorAction SilentlyContinue
 if ($botSystemPython -and $botSystemPython.Source -notlike '*\WindowsApps\*') {

@@ -4,6 +4,7 @@ import logging
 import os
 from uuid import uuid4
 
+from . import hackathons
 from .jobs import Scheduler, occurrences
 from .models import DAY_CODES, WEEKDAYS, at, clock, free_slots, parse_day
 from .network import ServiceError
@@ -12,7 +13,7 @@ from .views import HELP, MENU, agenda, event_line
 log = logging.getLogger(__name__)
 BUTTONS = {"📅 Сегодня": "/today", "🌅 Завтра": "/tomorrow", "⏭ Следующее": "/next",
            "🌤 Погода": "/weather", "🕊 Свободное время": "/free", "🎯 Задачи": "/tasks",
-           "➕ Задача": "/add", "⚙️ Настройки": "/settings"}
+           "➕ Задача": "/add", "⚙️ Настройки": "/settings", "🏆 Хакатоны": "/hack"}
 
 
 def title(value):
@@ -33,8 +34,10 @@ class Bot:
 
     async def day_text(self, day, weather=True, force=False):
         events, note, _ = await self.schedule.day(day, force)
-        forecast = await self.weather.today() if weather and day == self.now().date() else ""
-        return agenda(day, events, note, self.store, forecast)
+        now = self.now()
+        forecast = await self.weather.today() if weather and day == now.date() else ""
+        outlook = hackathons.outlook(self.store, now) if day == now.date() else ""
+        return agenda(day, events, note, self.store, forecast, outlook)
 
     async def reply(self, text, **kwargs):
         await self.telegram.send(self.config.owner_id, text, **kwargs)
@@ -66,6 +69,12 @@ class Bot:
                 if exc.status != 400:  # An expired callback can still contain a useful action.
                     raise
             data = callback.get("data", "")
+            if data.startswith("hk:"):
+                try:
+                    await self.hack_callback(data, message)
+                except (ValueError, IndexError, KeyError, StopIteration):
+                    await self.reply("Этот этап или хакатон уже удалён. Список: /hack")
+                return
             if data.startswith("done:"):
                 text = "/done " + data.split(":")[1]
             elif data.startswith("snooze:"):
@@ -160,10 +169,14 @@ class Bot:
                 conflicts = [pair for pair in overlaps(events) if any(e.uid == f"plan:{uid}" for e in pair)]
                 if conflicts:
                     await self.reply("⚠️ План пересекается с занятиями. Проверьте /day " + due.date().isoformat())
+        elif cmd == "/hack":
+            await self.hack(args)
         elif cmd in ("/tasks", "/reminders"):
+            projects = {p["id"]: p for p in self.store.projects()}
             items = self.store.items("reminder") if cmd == "/reminders" else [
-                i for i in self.store.items() if i["kind"] == "task" or (
-                    i["kind"] == "event" and datetime.fromisoformat(i["due"])+timedelta(minutes=i["duration"]) > now)]
+                i for i in self.store.items() if (i["kind"] == "task" or (
+                    i["kind"] == "event" and datetime.fromisoformat(i["due"])+timedelta(minutes=i["duration"]) > now))
+                and (not i["project"] or projects.get(i["project"], {}).get("status") not in (None, "done", "dropped"))]
             if not items:
                 await self.reply("Пока ничего нет. /add — дедлайн, /plan — план, /remind — напоминание.")
                 return
@@ -178,6 +191,8 @@ class Bot:
                     future = [d for d in occurrences(item, today, today+timedelta(days=7)) if d >= now]
                     due = future[0] if future else due
                 label = {"task": "🎯 Дедлайн", "event": "🗓 План", "reminder": "🔔 Напоминание"}[item["kind"]]
+                if item["project"]:
+                    label = "🏆 " + projects[item["project"]]["title"] + (" · дедлайн" if item["kind"] == "task" else " · событие")
                 repeat = {"once": "", "daily": " · ежедневно", "weekly": " · еженедельно"}[item["recurrence"]]
                 suffix = " · просрочено" if item["kind"] == "task" and due < now else ""
                 lines.append(f"{label} #{item['id']}\n{item['title']}\n{due:%d.%m.%Y %H:%M}{repeat}{suffix}")
@@ -270,6 +285,95 @@ class Bot:
         else:
             await self.reply("Выберите кнопку или команду /help", reply_markup=MENU)
 
+    async def hack(self, args):
+        now, tz = self.now(), self.config.timezone
+        if not args:
+            text, markup = hackathons.overview_text(self.store, now)
+            await self.reply(text, **({"reply_markup": markup} if markup else {}))
+            return
+        uid, _, rest = args.partition(" ")
+        action, _, rest = rest.strip().partition(" ")
+        rest = rest.strip()
+        if uid == "new":
+            uid, name = action, rest
+            if not hackathons.PROJECT_ID.fullmatch(uid) or self.store.project(uid):
+                await self.reply("ID: 2–24 символа латиницей, цифры или дефис, без повторов.\n"
+                                 "Пример: /hack new alfa Alfa-Hack 2026")
+                return
+            name = title(name)
+            self.store.put_project(dict(id=uid, title=name, kind="hackathon", organizer="", status="registration",
+                                        role="", summary="", prize="", links=[]))
+            await self.reply(f"🏆 Добавлен «{name}».\nЭтапы: /hack {uid} task 2026-11-16 14:00 Сдать решение")
+            return
+        project = self.store.project(uid)
+        if not project:
+            await self.reply("Хакатон не найден. Список: /hack")
+            return
+        if not action:
+            await self.show_card(uid)
+        elif action == "status":
+            if rest not in hackathons.STATUSES:
+                raise ValueError("Неизвестный статус")
+            project["status"] = rest
+            self.store.put_project(project)
+            await self.reply(f"✅ {project['title']}: {hackathons.STATUSES[rest]}")
+        elif action == "link":
+            url, _, name = rest.partition(" ")
+            if not url.startswith(("https://", "http://")) or len(url) > 500 or len(project["links"]) >= 8:
+                raise ValueError("Нужна ссылка http(s), не больше восьми")
+            project["links"].append(dict(title=title(name or "Ссылка"), url=url))
+            self.store.put_project(project)
+            await self.reply("🔗 Ссылка сохранена.")
+        elif action in ("task", "event", "day"):
+            tokens = rest.split(maxsplit={"task": 2, "event": 3, "day": 1}[action])
+            if action == "day":
+                due, duration, text = at(parse_day(tokens[0], now.date()), "00:00", tz), 1440, title(tokens[1])
+            else:
+                due = at(parse_day(tokens[0], now.date()), clock(tokens[1]), tz)
+                duration = int(tokens[2]) if action == "event" else 0
+                text = title(tokens[3] if action == "event" else tokens[2])
+                if action == "event" and not 5 <= duration <= 1440:
+                    raise ValueError("Недопустимая длительность")
+            stage = self.store.add_item("task" if action == "task" else "event", text, due.isoformat(), duration,
+                                        project=uid, all_day=action == "day")
+            await self.reply(f"✅ Этап #{stage} добавлен в «{project['title']}»: {text}")
+        else:
+            raise ValueError("Неизвестное действие")
+
+    async def show_card(self, uid, message=None):
+        text, markup = hackathons.card(self.store, uid, self.now())
+        if message:
+            try:
+                await self.telegram.call("editMessageText", chat_id=message["chat"]["id"],
+                                         message_id=message["message_id"], text=text, reply_markup=markup,
+                                         link_preview_options={"is_disabled": True})
+                return
+            except ServiceError as exc:
+                if exc.status != 400:  # 400: message too old or unchanged; a fresh card is fine.
+                    raise
+        await self.reply(text, reply_markup=markup)
+
+    async def hack_callback(self, data, message):
+        _, action, *rest = data.split(":")
+        if action == "list":
+            text, markup = hackathons.overview_text(self.store, self.now())
+            await self.reply(text, **({"reply_markup": markup} if markup else {}))
+        elif action == "open":
+            if not self.store.project(rest[0]):
+                raise KeyError(rest[0])
+            await self.show_card(rest[0])
+        elif action == "check":
+            item = next(i for i in self.store.items(include_done=True) if i["id"] == int(rest[0]) and i["project"])
+            hackathons.set_done(self.store, item, not hackathons.is_done(self.store, item))
+            await self.show_card(item["project"], message)
+        elif action == "status":
+            project = self.store.project(rest[0])
+            if not project or rest[1] not in hackathons.STATUSES:
+                raise KeyError(rest[0])
+            project["status"] = rest[1]
+            self.store.put_project(project)
+            await self.show_card(project["id"], message)
+
     async def lesson(self, args):
         action, _, rest = args.partition(" ")
         if action == "list":
@@ -340,7 +444,7 @@ class Bot:
         await self.telegram.call("setMyCommands", commands=[
             {"command": name, "description": desc} for name, desc in
             [("app", "Открыть приложение"), ("today", "План на сегодня"), ("tomorrow", "План на завтра"), ("next", "Следующее занятие"),
-             ("tasks", "Задачи и планы"), ("weather", "Погода Краснодара"),
+             ("tasks", "Задачи и планы"), ("hack", "Хакатоны и этапы"), ("weather", "Погода Краснодара"),
              ("settings", "Настройки"), ("help", "Все команды"), ("id", "Мой Telegram ID")]])
         worker = asyncio.create_task(self.scheduler.run())
         backoff = 1

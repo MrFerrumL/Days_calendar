@@ -122,12 +122,18 @@ class Schedule:
         result = [e for e in university if e.start.date() == day]
         anchor = date.fromisoformat(self.store.get("cycle_anchor", self.anchor.isoformat()))
         result += personal_events(day, self.store.rules(), anchor, self.config.timezone, self.store.skipped)
+        projects = {p["id"]: p for p in self.store.projects()}
         for item in self.store.items("event"):
+            project = projects.get(item["project"])
+            if item["project"] and (not project or project.get("status") == "dropped"):
+                continue
             start = datetime.fromisoformat(item["due"])
             end = start + timedelta(minutes=item["duration"])
             # Include events crossing midnight in both days.
             if start.date() <= day <= (end - timedelta(microseconds=1)).date():
-                result.append(Event("plan:" + str(item["id"]), item["title"], start, end, "plan"))
+                result.append(Event("plan:" + str(item["id"]), item["title"], start, end,
+                                    "hackathon" if project else "plan", project["title"] if project else "",
+                                    all_day=bool(item["all_day"])))
         adjusted = []
         for event in result:
             patch = self.store.override(event.uid + '|' + event.start.date().isoformat())
