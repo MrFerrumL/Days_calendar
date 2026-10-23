@@ -27,6 +27,9 @@ class Config:
     timezone: ZoneInfo
     data_dir: Path
     lessons_path: Path
+    mail_user: str = ""
+    mail_password: str = ""
+    mail_host: str = "imap.gmail.com"
 
     @classmethod
     def load(cls, require_token: bool = True):
@@ -39,4 +42,8 @@ class Config:
             ZoneInfo(os.getenv("TIMEZONE", "Europe/Moscow")),
             Path(os.getenv("DATA_DIR", str(ROOT / "runtime"))).resolve(),
             ROOT / "data" / "personal_schedule.json",
+            os.getenv("MAIL_USER", "").strip(),
+            # Google shows app passwords in groups of four; IMAP expects them without spaces.
+            os.getenv("MAIL_PASSWORD", "").replace(" ", ""),
+            os.getenv("MAIL_IMAP_HOST", "imap.gmail.com").strip(),
         )

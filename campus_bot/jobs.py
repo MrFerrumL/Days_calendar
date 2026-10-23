@@ -126,6 +126,8 @@ class Scheduler:
                 item = next((i for i in store.items("reminder") if i["id"] == uid), None)
                 if item and item["recurrence"] == "once":
                     store.finish(uid)
+        if bot.mail.due(now):
+            await bot.mail.check(now)
 
     async def run(self):
         while True:

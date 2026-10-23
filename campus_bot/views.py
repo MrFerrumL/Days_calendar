@@ -82,6 +82,12 @@ HELP = """📔 Campus Day — команды
   active, submitted, final, done, dropped
 Дедлайны хакатонов напоминают за 3 дня, сутки, 2 часа и в срок.
 
+ПОЧТА
+/mail — статус и настройка: важные письма приходят в чат
+/mail check — проверить сейчас
+/mail vip example.com · /mail mute example.com
+/mail off · /mail on · /set mail 5 — проверка раз в 5 минут
+
 НАПОМИНАНИЯ
 /remind 2026-11-02 18:00 Купить тетради
 /remind daily 09:00 Выпить воды

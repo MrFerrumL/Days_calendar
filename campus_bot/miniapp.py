@@ -13,6 +13,7 @@ import time
 from urllib.parse import parse_qsl, urlsplit, parse_qs
 from uuid import uuid4
 from . import hackathons
+from .mail import masked
 from .models import clock
 from .schedule import Schedule
 from .storage import Store
@@ -75,7 +76,12 @@ class App:
                     rules=store.rules(),group=store.get('group_name'),notes=notes,weather=await Weather(store,self.config.timezone).today(),
                     settings={k:store.get(k) for k in ('digest_times','weather_times','notifications')},
                     hackathons=hackathons.overview(store,now),clashes=hackathons.clash_lines(store,now),
-                    statuses=hackathons.STATUSES,kinds=hackathons.KINDS)
+                    statuses=hackathons.STATUSES,kinds=hackathons.KINDS,mail=self.mail(store))
+
+    def mail(self,store):
+        configured = bool(self.config.mail_user and self.config.mail_password)
+        return dict(configured=configured,enabled=store.get('mail_enabled',True),checked=store.get('mail_checked'),
+                    address=masked(self.config.mail_user) if configured else '',error=store.get('mail_error'))
 
     def project(self,store,body):
         uid = body.get('id') or 'h-'+uuid4().hex[:6]
@@ -187,6 +193,10 @@ class App:
                     if not isinstance(body[name],list) or len(body[name])>6:
                         raise ValueError('До шести отправок')
                     store.set(name,sorted({clock(t) for t in body[name]}))
+            if 'mail_enabled' in body:
+                if type(body['mail_enabled']) is not bool:
+                    raise ValueError('Неверная настройка')
+                store.set('mail_enabled',body['mail_enabled'])
             if 'notifications' in body:
                 if type(body['notifications']) is not bool:
                     raise ValueError('Неверная настройка')

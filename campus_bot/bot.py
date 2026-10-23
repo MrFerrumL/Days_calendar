@@ -6,6 +6,7 @@ from uuid import uuid4
 
 from . import hackathons
 from .jobs import Scheduler, occurrences
+from .mail import Mail, normalize
 from .models import DAY_CODES, WEEKDAYS, at, clock, free_slots, parse_day
 from .network import ServiceError
 from .views import HELP, MENU, agenda, event_line
@@ -28,6 +29,7 @@ class Bot:
         self.config, self.store, self.schedule = config, store, schedule
         self.weather, self.telegram = weather, telegram
         self.scheduler = Scheduler(self)
+        self.mail = Mail(self)
 
     def now(self):
         return datetime.now(self.config.timezone)
@@ -75,7 +77,9 @@ class Bot:
                 except (ValueError, IndexError, KeyError, StopIteration):
                     await self.reply("Этот этап или хакатон уже удалён. Список: /hack")
                 return
-            if data.startswith("done:"):
+            if data.startswith("mail:mute:"):
+                text = "/mail mute " + data.split(":", 2)[2]
+            elif data.startswith("done:"):
                 text = "/done " + data.split(":")[1]
             elif data.startswith("snooze:"):
                 uid = int(data.split(":")[1])
@@ -171,6 +175,8 @@ class Bot:
                     await self.reply("⚠️ План пересекается с занятиями. Проверьте /day " + due.date().isoformat())
         elif cmd == "/hack":
             await self.hack(args)
+        elif cmd == "/mail":
+            await self.mail_command(args)
         elif cmd in ("/tasks", "/reminders"):
             projects = {p["id"]: p for p in self.store.projects()}
             items = self.store.items("reminder") if cmd == "/reminders" else [
@@ -340,6 +346,37 @@ class Bot:
         else:
             raise ValueError("Неизвестное действие")
 
+    async def mail_command(self, args):
+        action, _, value = args.partition(" ")
+        action = action.lower()
+        if action in ("", "status"):
+            await self.reply(self.mail.status(self.now()))
+        elif action == "check":
+            if not self.mail.configured:
+                await self.reply(self.mail.status(self.now()))
+            elif await self.mail.check(self.now(), manual=True) == 0:
+                await self.reply("📬 Новых важных писем нет.")
+        elif action in ("on", "off"):
+            self.store.set("mail_enabled", action == "on")
+            self.mail.next_check = None
+            await self.reply("📬 Важные письма снова приходят в чат." if action == "on" else
+                             "📭 Письма в чат больше не присылаю. Включить: /mail on")
+        elif action in ("vip", "mute", "unvip", "unmute"):
+            entry = normalize(value)
+            key, other = ("mail_vip", "mail_mute") if action.endswith("vip") else ("mail_mute", "mail_vip")
+            entries = set(self.store.get(key, []))
+            if action.startswith("un"):
+                entries.discard(entry)
+            else:
+                entries.add(entry)
+                self.store.set(other, sorted(set(self.store.get(other, [])) - {entry}))
+            self.store.set(key, sorted(entries))
+            await self.reply({"vip": f"⭐ Письма от {entry} присылаю всегда.",
+                              "mute": f"🔕 Письма от {entry} больше не присылаю. Вернуть: /mail unmute {entry}",
+                              "unvip": f"✅ {entry} убран из важных.", "unmute": f"✅ {entry} снова может приходить."}[action])
+        else:
+            raise ValueError("Неизвестное действие")
+
     async def show_card(self, uid, message=None):
         text, markup = hackathons.card(self.store, uid, self.now())
         if message:
@@ -418,6 +455,12 @@ class Bot:
                 raise ValueError("От 15 до 1440 минут")
             self.store.set("sync_minutes", minutes)
             self.scheduler.next_sync = None
+        elif name == "mail":
+            minutes = int(value)
+            if not 1 <= minutes <= 60:
+                raise ValueError("От 1 до 60 минут")
+            self.store.set("mail_minutes", minutes)
+            self.mail.next_check = None
         elif name == "anchor":
             anchor = date.fromisoformat(value)
             if anchor.weekday() != 0:
@@ -444,7 +487,7 @@ class Bot:
         await self.telegram.call("setMyCommands", commands=[
             {"command": name, "description": desc} for name, desc in
             [("app", "Открыть приложение"), ("today", "План на сегодня"), ("tomorrow", "План на завтра"), ("next", "Следующее занятие"),
-             ("tasks", "Задачи и планы"), ("hack", "Хакатоны и этапы"), ("weather", "Погода Краснодара"),
+             ("tasks", "Задачи и планы"), ("hack", "Хакатоны и этапы"), ("mail", "Важная почта"), ("weather", "Погода Краснодара"),
              ("settings", "Настройки"), ("help", "Все команды"), ("id", "Мой Telegram ID")]])
         worker = asyncio.create_task(self.scheduler.run())
         backoff = 1
