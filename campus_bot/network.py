@@ -4,6 +4,7 @@ import os
 import socket
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
+from urllib.parse import urlsplit, unquote
 
 
 class ServiceError(Exception):
@@ -14,13 +15,13 @@ class ServiceError(Exception):
         super().__init__(f"{service}: HTTP {status}" if status else f"{service}: сеть недоступна")
 
 
-def request_json(url, payload=None, timeout=15, service="Источник"):
+def request_json(url, payload=None, timeout=15, service="Источник", open_url=None):
     body = json.dumps(payload, ensure_ascii=False).encode() if payload is not None else None
     request = Request(url, data=body, headers={"User-Agent": os.getenv(
         "HTTP_USER_AGENT", "CampusDayBot/1.0 (https://github.com/MrFerrumL/Days_calendar)"),
                                               "Accept": "application/json", "Content-Type": "application/json"})
     try:
-        with urlopen(request, timeout=timeout) as response:
+        with (open_url or urlopen)(request, timeout=timeout) as response:
             result = json.load(response)
             if isinstance(result, dict) and response.headers.get("Expires"):
                 result["_http_expires"] = response.headers["Expires"]
@@ -40,14 +41,32 @@ async def get_json(url, service="Источник"):
     return await asyncio.to_thread(request_json, url, service=service)
 
 
+def telegram_opener(proxy_url):
+    """Proxy only Telegram; DNS is resolved remotely and HTTPS still verifies TLS."""
+    if not proxy_url:
+        return None
+    from urllib.request import build_opener, ProxyHandler
+    proxy = urlsplit(proxy_url)
+    if proxy.scheme not in {"socks5", "socks5h"} or not proxy.hostname:
+        raise ValueError("TELEGRAM_PROXY_URL: требуется socks5h://host:port")
+    import socks
+    from sockshandler import SocksiPyHandler
+    return build_opener(ProxyHandler({}), SocksiPyHandler(
+        socks.SOCKS5, proxy.hostname, proxy.port or 9050, rdns=True,
+        username=unquote(proxy.username) if proxy.username else None,
+        password=unquote(proxy.password) if proxy.password else None)).open
+
+
 class Telegram:
     def __init__(self, token):
         self._base = "https://api.telegram.org/bot" + token + "/"
+        self._open_url = telegram_opener(os.getenv("TELEGRAM_PROXY_URL", ""))
         self._send_lock = asyncio.Lock()
         self._next_send = {}
 
     async def call(self, method, **payload):
-        response = await asyncio.to_thread(request_json, self._base + method, payload, 45, "Telegram")
+        response = await asyncio.to_thread(request_json, self._base + method, payload, 45,
+                                           "Telegram", self._open_url)
         if not response.get("ok"):
             raise ServiceError("Telegram", response.get("error_code", 0),
                                response.get("parameters", {}).get("retry_after", 0))

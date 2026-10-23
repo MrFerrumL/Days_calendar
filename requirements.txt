@@ -1,2 +1,4 @@
 # IANA timezone database for Windows (zoneinfo uses system tzdata on Linux).
 tzdata>=2024.1
+# Optional Telegram SOCKS transport (HTTPS certificate verification remains enabled).
+PySocks==1.7.1
